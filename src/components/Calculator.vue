@@ -69,7 +69,7 @@
 
             <li v-for="gif in this.gifs" v-bind:key="gif.id">
 
-                <img :src="`https://media.giphy.com/media/${gif.id}/giphy.gif`" alt="gif" />
+                <img :src="`https://media.giphy.com/media/${gif.id}/giphy.gif`" alt="gif" width="200px"/>
 
             </li>
 
@@ -89,7 +89,7 @@ export default {
     return {
       calculation: '',
       gifs: [],
-      gif1: ''
+      result: '' 
     }
   },
   methods: {
@@ -98,17 +98,26 @@ export default {
     },
 
     calculateExpression() {
-      console.log("expression calculated: ")
       this.calculation = eval(this.calculation)
+      if (!this.calculation) return;
+      let result = this.calculation.toString()
 
       axios
-        .get("https://api.giphy.com/v1/gifs/search?q=cats&api_key=Yn6qSAkr1cTkmEeJSO8rVhmWmZkpPLvP&limit=5")
+        .get(`https://api.giphy.com/v1/gifs/search?q=cats&api_key=Yn6qSAkr1cTkmEeJSO8rVhmWmZkpPLvP&limit=${result[result.length - 1]}`)
         .then(res => {
-            this.gifs = res.data.data
-            console.log(this.gifs[1])
+                var j, x, i;
+                for (i = res.data.data.length - 1; i > 0; i--) {
+                    j = Math.floor(Math.random() * (i + 1));
+                    x = res.data.data[i];
+                    res.data.data[i] = res.data.data[j];
+                    res.data.data[j] = x;
+                }
+                this.gifs = res.data.data
         })
         .catch(err => console.log(err))
       
+    
+
     },
     addNumber(e) {
       console.log(e.target.value)

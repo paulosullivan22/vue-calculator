@@ -65,7 +65,15 @@
         
         </form>
 
-          <img :src="this.gif1" />
+        <ul v-if="this.gifs.length">
+
+            <li v-for="gif in this.gifs" v-bind:key="gif.id">
+
+                <img :src="`https://media.giphy.com/media/${gif.id}/giphy.gif`" alt="gif" />
+
+            </li>
+
+        </ul>
 
   </div>
 
@@ -94,11 +102,10 @@ export default {
       this.calculation = eval(this.calculation)
 
       axios
-        .get("http://api.giphy.com/v1/gifs/search?q=cats&api_key=Yn6qSAkr1cTkmEeJSO8rVhmWmZkpPLvP&limit=5")
+        .get("https://api.giphy.com/v1/gifs/search?q=cats&api_key=Yn6qSAkr1cTkmEeJSO8rVhmWmZkpPLvP&limit=5")
         .then(res => {
             this.gifs = res.data.data
-            this.gif1 = res.data.data[0].url
-            console.log(this.gif1)
+            console.log(this.gifs[1])
         })
         .catch(err => console.log(err))
       

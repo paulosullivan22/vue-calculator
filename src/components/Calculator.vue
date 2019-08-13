@@ -128,6 +128,8 @@ export default {
 <style lang="scss">
 
 table {
+  background-color: aqua;
+  
   tbody {
     display: flex;
     flex-direction: column;

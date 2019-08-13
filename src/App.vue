@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <Calculator msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -21,7 +20,11 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 body {
-  font-family: 'Open Sans', sans-serif
+  font-family: 'Open Sans', sans-serif;
+  background-color: #141d26;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
 }
 
 

@@ -3,66 +3,61 @@
 
     <p>Calculator</p>
 
-        <form name="form">
+          <div class="calculator-container">
 
-          <table>
-            <thead>
-
-            <tr>
-              <input 
+            <input 
+                class="calculator-output"
                 type="text" 
                 placeholder="Calculate an expression" 
                 v-model="calculation" 
                 disabled
                 />
-            </tr>
 
-            </thead>
+                <table cellspacing="0">
 
-            <tbody>
+                  <tbody>
 
-              <tr>
+                    <tr>
 
-                <td><input class="button" type="button" value="1" v-on:click="addNumber" /></td>
-                <td><input class="button" type="button" value="2" v-on:click="addNumber"/></td>
-                <td><input class="button" type="button" value="3" v-on:click="addNumber"/></td>
-                <td><input class="button" type="button" value="+" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="1" v-on:click="addNumber" /></td>
+                      <td><input type="button" value="2" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="3" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="+" v-on:click="addNumber"/></td>
 
-              </tr>
+                    </tr>
 
-              <tr>
+                    <tr>
 
-                <td><input class="button" type="button" value="4" v-on:click="addNumber" /></td>
-                <td><input class="button" type="button" value="5" v-on:click="addNumber"/></td>
-                <td><input class="button" type="button" value="6" v-on:click="addNumber"/></td>
-                <td><input class="button" type="button" value="-" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="4" v-on:click="addNumber" /></td>
+                      <td><input type="button" value="5" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="6" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="-" v-on:click="addNumber"/></td>
 
-              </tr>
+                    </tr>
 
-              <tr>
+                    <tr>
 
-                <td><input class="button" type="button" value="7" v-on:click="addNumber" /></td>
-                <td><input class="button" type="button" value="8" v-on:click="addNumber"/></td>
-                <td><input class="button" type="button" value="9" v-on:click="addNumber"/></td>
-                <td><input class="button" type="button" value="*" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="7" v-on:click="addNumber" /></td>
+                      <td><input type="button" value="8" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="9" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="*" v-on:click="addNumber"/></td>
 
-              </tr>
+                    </tr>
 
-              <tr>
+                    <tr>
 
-                <td><input class="button" type="button" value="C" v-on:click="clear" /></td>
-                <td><input class="button" type="button" value="0" v-on:click="addNumber"/></td>
-                <td><input class="button" type="button" value="=" v-on:click="calculateExpression"/></td>
-                <td><input class="button" type="button" value="/" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="C" v-on:click="clear" /></td>
+                      <td><input type="button" value="0" v-on:click="addNumber"/></td>
+                      <td><input type="button" value="=" v-on:click="calculateExpression"/></td>
+                      <td><input type="button" value="/" v-on:click="addNumber"/></td>
 
-              </tr>
+                    </tr>
 
-            </tbody>
+                  </tbody>
 
-          </table>
-        
-        </form>
+                </table>
 
+        </div>
 
 
         <div v-if="this.gif">
@@ -124,10 +119,40 @@ export default {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang="scss">
 
+.calculator-container {
+  width: 300px;
 
+  .calculator-output {
+    box-sizing: border-box;
+    height: 50px;
+    width: 100%;
+  }
+
+  table {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid black;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    tbody {
+      td {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    input {
+      width: 60px;
+      border: none;
+      outline: none;
+      height: 60px;
+      font-size: 1.2em;
+    }
+  }
+}
 </style>
 
 

@@ -3,7 +3,7 @@
 
     <p>Calculator</p>
 
-        <form name="form" @submit.prevent="calculateExpression">
+        <form name="form">
 
           <table>
             <thead>
@@ -12,9 +12,7 @@
               <input 
                 type="text" 
                 placeholder="Calculate an expression" 
-                value="calculation" 
                 v-model="calculation" 
-                v-on:input="myChangeFunc" 
                 disabled
                 />
             </tr>
@@ -65,15 +63,15 @@
         
         </form>
 
-        <ul v-if="this.gifs.length">
 
-            <li v-for="gif in this.gifs" v-bind:key="gif.id">
 
-                <img :src="`https://media.giphy.com/media/${gif.id}/giphy.gif`" alt="gif" width="200px"/>
+        <div v-if="this.gif">
 
-            </li>
+          <p> {{ this.message }} </p>
 
-        </ul>
+          <img :src="`https://media.giphy.com/media/${this.gif.id}/giphy.gif`" alt="gif" width="300px"/>
+
+        </div>
 
   </div>
 
@@ -88,44 +86,38 @@ export default {
   data() {
     return {
       calculation: '',
-      gifs: [],
+      gif: false,
       result: '' 
     }
   },
   methods: {
     clear() {
-      this.calculation = ''
+      this.calculation = '',
+      this.gif = '',
+      this.message = ''
     },
 
     calculateExpression() {
+      // if result is zero...
       this.calculation = eval(this.calculation)
       if (!this.calculation) return;
       let result = this.calculation.toString()
+      console.log(result)
+      console.log(result[result.length - 1])
 
       axios
-        .get(`https://api.giphy.com/v1/gifs/search?q=cats&api_key=Yn6qSAkr1cTkmEeJSO8rVhmWmZkpPLvP&limit=${result[result.length - 1]}`)
+        .get(`https://api.giphy.com/v1/gifs/random?api_key=Yn6qSAkr1cTkmEeJSO8rVhmWmZkpPLvP&tag=cat&limit=5`)
         .then(res => {
-                var j, x, i;
-                for (i = res.data.data.length - 1; i > 0; i--) {
-                    j = Math.floor(Math.random() * (i + 1));
-                    x = res.data.data[i];
-                    res.data.data[i] = res.data.data[j];
-                    res.data.data[j] = x;
-                }
-                this.gifs = res.data.data
+                this.gif = res.data.data
+                console.log(this.gif)
+                this.message = `Well done, you did a sum. Enjoy a random cat gif as a reward.`
         })
         .catch(err => console.log(err))
-      
-    
-
     },
     addNumber(e) {
-      console.log(e.target.value)
-      this.calculation = this.calculation.concat(e.target.value)
-      console.log(this.calculation)
-    },
-    myChangeFunc() {
-      console.log(this.calculation)
+
+      if (!this.calculation) this.calculation = e.target.value
+      else this.calculation += e.target.value
     }
   }
 }

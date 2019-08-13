@@ -125,24 +125,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
+<style>
 
-table {
-  background-color: aqua;
-  
-  tbody {
-    display: flex;
-    flex-direction: column;
-
-    td {
-      th {
-        input {
-          color: tan;
-        }
-      }
-    }
-  }
-}
 
 </style>
 
